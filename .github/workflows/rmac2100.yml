@@ -59,6 +59,12 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        
+    # 新增步骤：克隆 UA2F 仓库到 package 目录
+    - name: Clone UA2F repository
+      working-directory: /workdir/openwrt/package
+      run: git clone https://github.com/zhuang-zx2018/UA2F.git
+      
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
